@@ -12,6 +12,6 @@ label = Label()
 label.pack()
 
 url = 'https://cataas.com/cat'
-
+img = load_image(url)
 
 window.mainloop()
