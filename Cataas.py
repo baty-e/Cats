@@ -4,6 +4,11 @@ import requests
 from io import BytesIO
 
 
+def load_image(url):
+    try:
+
+
+
 window = Tk()
 window.title("Cats!")
 window.geometry("600x480")
@@ -12,7 +17,7 @@ label = Label()
 label.pack()
 
 url = 'https://cataas.com/cat'
-img = load_image(url) # функция загрузки сбора изображений
+img = load_image(url) # функцию load_image для загрузки сбора изображений создадим сами
 
 if img:
     # Устанавливаем изображение в метку
