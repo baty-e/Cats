@@ -31,13 +31,15 @@ def open_new_window():
     img = load_image(url)
 
     if img:
+        global k
         new_window = Toplevel()
         new_window.title("Картинка с котиком")
-        new_window.geometry(f"550x550+{w2}+{h2}")
+        new_window.geometry(f"550x550+{w2+k}+{h2+k}")
         label = Label(new_window, image=img)
         label.image = img  # Сохраняем ссылку на изображение
+        k+=25
         label.pack()
-
+k = 40
 
 def exit():
     window.destroy()
