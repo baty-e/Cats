@@ -19,17 +19,24 @@ def load_image(url):
         print(f"Ошибка при загрузке изображения: {e}")
         return None # если найдёт ошибу ничего не возвращать
 
-def set_image(): # функция для загрузки изображения
 
-    img = load_image(url)  # функцию load_image для загрузки сбора изображений создадим сами
+def set_image():
+    img = load_image(url)
     if img:
-        # Устанавливаем изображение в метку
         label.config(image=img)
-        # Необходимо сохранить ссылку на изображение, чтобы избежать сборки мусора
-        label.image = img
+        label.image = img  # Сохраняем ссылку на изображение
 
-def exit():
-    window.destroy()
+
+def open_new_window():
+    img = load_image(url)
+
+    if img:
+        new_window = Toplevel()
+        new_window.title("Картинка с котиком")
+        new_window.geometry(f"550x550+{w2}+{h2}")
+        label = Label(new_window, image=img)
+        label.image = img  # Сохраняем ссылку на изображение
+        label.pack()
 
 
 def exit():
@@ -57,7 +64,7 @@ window.config(menu=menu_bar)
 
 file_menu = Menu(menu_bar, tearoff=0)
 menu_bar.add_cascade(label="Файл", menu=file_menu)
-file_menu.add_command(label="Загрузить фото", command=set_image)
+file_menu.add_command(label="Загрузить фото", command=open_new_window)
 file_menu.add_separator()
 file_menu.add_command(label="Выход", command=exit)
 
