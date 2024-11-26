@@ -12,6 +12,13 @@ label = Label()
 label.pack()
 
 url = 'https://cataas.com/cat'
-img = load_image(url)
+img = load_image(url) # функция загрузки сбора изображений
+
+if img:
+    # Устанавливаем изображение в метку
+    label.config(image=img)
+    # Необходимо сохранить ссылку на изображение, чтобы избежать сборки мусора
+    label.image = img
+
 
 window.mainloop()
