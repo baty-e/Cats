@@ -11,6 +11,7 @@ window.geometry("600x480")
 label = Label()
 label.pack()
 
+url = 'https://cataas.com/cat'
 
 
 window.mainloop()
