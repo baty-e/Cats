@@ -8,6 +8,8 @@ window = Tk()
 window.title("Cats!")
 window.geometry("600x480")
 
+label = Label()
+label.pack()
 
 
 
