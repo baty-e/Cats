@@ -16,27 +16,35 @@ def load_image(url):
         print(f"Ошибка при загрузке изображения: {e}")
         return None # если найдёт ошибу ничего не возвращать
 
+def set_image(): # функция для загрузки изображения
+
+    img = load_image(url)  # функцию load_image для загрузки сбора изображений создадим сами
+    if img:
+        # Устанавливаем изображение в метку
+        label.config(image=img)
+        # Необходимо сохранить ссылку на изображение, чтобы избежать сборки мусора
+        label.image = img
+
+
 
 window = Tk()
 window.title("Cats!")
 
 w = window.winfo_screenwidth()
 h = window.winfo_screenheight()
-w2 = w//2 - 400
-h2 = h//2 - 300
-window.geometry(f"800x600+{w2}+{h2}")
+w2 = w//2 - 250
+h2 = h//2 - 350
+window.geometry(f"550x550+{w2}+{h2}")
+
+update_button = Button(window, text="Обновить", command=set_image)
+update_button.pack(anchor=NE)
+
 
 label = Label()
 label.pack()
 
 url = 'https://cataas.com/cat'
-img = load_image(url) # функцию load_image для загрузки сбора изображений создадим сами
 
-if img:
-    # Устанавливаем изображение в метку
-    label.config(image=img)
-    # Необходимо сохранить ссылку на изображение, чтобы избежать сборки мусора
-    label.image = img
-
+set_image() # Вызываем функцию прописанную выше для установки первого полученного изображения в метку
 
 window.mainloop()
