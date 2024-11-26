@@ -11,6 +11,9 @@ def load_image(url):
         image_data = BytesIO(response.content) # Читаем байты из ответа в объект BytesIO
                                             # кладём сюда и открываем изображение с помощью PIL
         img = Image.open(image_data) # Открываем изображение с помощью PIL
+
+        img.thumbnail((550, 550), Image.Resampling.LANCZOS)
+
         return ImageTk.PhotoImage(img) # если всё соответствует вернуть картинку (фото)
     except Exception as e:
         print(f"Ошибка при загрузке изображения: {e}")
@@ -25,6 +28,8 @@ def set_image(): # функция для загрузки изображения
         # Необходимо сохранить ссылку на изображение, чтобы избежать сборки мусора
         label.image = img
 
+def exit():
+    window.destroy()
 
 
 window = Tk()
@@ -39,9 +44,12 @@ window.geometry(f"550x550+{w2}+{h2}")
 update_button = Button(window, text="Обновить", command=set_image)
 update_button.pack(anchor=NE)
 
-
 label = Label()
 label.pack()
+
+
+
+
 
 url = 'https://cataas.com/cat'
 
