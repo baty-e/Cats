@@ -4,7 +4,11 @@ import requests
 from io import BytesIO
 
 
+window = Tk()
+window.title("Cats!")
+window.geometry("600x480")
 
 
 
 
+window.mainloop()
