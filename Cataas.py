@@ -1,7 +1,11 @@
 from tkinter import *
+from tkinter import ttk
 from PIL import Image, ImageTk
 import requests
 from io import BytesIO
+
+
+ALLOWED_TAGS = ['sleep', 'jump', 'smile', 'fight', 'black', 'white', 'red', 'siamese', 'bengal']
 
 
 def load_image(url):
@@ -17,22 +21,22 @@ def load_image(url):
         return ImageTk.PhotoImage(img) # если всё соответствует вернуть картинку (фото)
     except Exception as e:
         print(f"Ошибка при загрузке изображения: {e}")
-        return None # если найдёт ошибу ничего не возвращать
+        return None # если найдёт ошибку ничего не возвращать
 
 
 def set_image():
-    tag = tag_entry.get()
+    tag=tag_combobox # tag = tag_entry.get()
     url_with_tag = f'https://cataas.com/cat/{tag}' if tag else 'https://cataas.com/cat'
     img = load_image(url_with_tag)
-
-    img = load_image(url)
     if img:
-        label.config(image=img)
+        label.config(image = img)
         label.image = img  # Сохраняем ссылку на изображение
 
 
 def open_new_window():
-    img = load_image(url)
+    tag = tag_combobox.get()
+    url_with_tag = f'https://cataas.com/cat/{tag}' if tag else 'https://cataas.com/cat'
+    img = load_image(url_with_tag)
 
     if img:
         global k
@@ -59,11 +63,8 @@ h2 = h//2 - 350
 window.geometry(f"550x550+{w2}+{h2}")
 
 
-tag_entry = Entry()
-tag_entry.pack()
-
-load_button = Button(text="Загрузить по тегу", command=open_new_window)
-load_button.pack()
+# tag_entry = Entry()
+# tag_entry.pack()
 
 # update_button = Button(window, text="Обновить", command=set_image)
 # update_button.pack(anchor=NE)
@@ -84,6 +85,15 @@ file_menu.add_command(label="Выход", command=exit)
 
 url = 'https://cataas.com/cat'
 
-set_image() # Вызываем функцию прописанную выше для установки первого полученного изображения в метку
+tag_label = Label(text="Выбери тег")
+tag_label.pack()
+
+tag_combobox = ttk.Combobox(values=ALLOWED_TAGS)
+tag_combobox.pack()
+
+load_button = Button(text="Загрузить по тегу", command=open_new_window)
+load_button.pack()
+
+set_image() # Вызываем функцию, прописанную выше для установки первого полученного изображения в метку
 
 window.mainloop()
